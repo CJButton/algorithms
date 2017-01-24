@@ -52,7 +52,6 @@ class LinkedList
     node = @head
 
     loop do
-
       if node.key == key
         return true
       end
@@ -90,6 +89,8 @@ class LinkedList
     loop do
       if node.nil?
         return nil
+      elsif @head.next.nil?
+        return @head.key = nil, @head.val = nil
       elsif node.key == key && node != @head
         node.next.prev = node.prev
       elsif node.key == key && node == @head
