@@ -66,8 +66,6 @@ class HashMap
         set(node.key, node.val)
       end
     end
-
-    # @store = new_store
   end
 
   def bucket(key)

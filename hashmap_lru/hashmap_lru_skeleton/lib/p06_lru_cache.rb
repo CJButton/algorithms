@@ -3,6 +3,7 @@ require_relative 'p04_linked_list'
 
 class LRUCache
   attr_reader :count
+
   def initialize(max, prc)
     @map = HashMap.new
     @store = LinkedList.new
@@ -14,8 +15,14 @@ class LRUCache
     @map.count
   end
 
+  # @map[key] is an alias for #get in hash_map
   def get(key)
-    
+    if @map[key]
+      update_link!(key)
+    else
+      calc!(key)
+    end
+
   end
 
   def to_s
@@ -25,7 +32,13 @@ class LRUCache
   private
 
   def calc!(key)
+    val = @prc.call(key)
+    link = @store.insert(key, val)
+    @map[key] = link
     # suggested helper method; insert an (un-cached) key
+    eject! if count > @max
+
+    val
   end
 
   def update_link!(link)
@@ -33,5 +46,8 @@ class LRUCache
   end
 
   def eject!
+    @store[0].next.prev = nil
+    @map.delete(@store[0].key)
+    nil
   end
 end
