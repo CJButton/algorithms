@@ -34,7 +34,7 @@ class HashMap
   def each
     @store.each do |bucket|
       bucket.each do |node|
-        yield [node.key, node.val]
+        return [node.key, node.val]
       end
     end
   end
@@ -57,17 +57,17 @@ class HashMap
   end
 
   def resize!
-    new_store = Array.new(num_buckets * 2) {LinkedList.new}
+    prev_store = @store
+    @store = Array.new(num_buckets * 2) {LinkedList.new}
     @count = 0
 
-    # @store.each do |bucket|
-    #   bucket.each do |node|
-    #     new_store[node.key.hash % (num_buckets * 2)].insert(node.key, node.val)
-    #   end
-    # end
-    @store.each do |bucket|
+    prev_store.each do |bucket|
+      bucket.each do |node|
+        set(node.key, node.val)
+      end
+    end
 
-    @store = new_store
+    # @store = new_store
   end
 
   def bucket(key)

@@ -89,23 +89,33 @@ class LinkedList
     loop do
       if node.nil?
         return nil
-      elsif @head.next.nil?
-        return @head.key = nil, @head.val = nil
-      elsif node.key == key && node != @head
-        node.next.prev = node.prev
-      elsif node.key == key && node == @head
-        node.next.prev = nil
-        @head = node.next
-      elsif node.key == key && node == @tail
-        node.prev.next = nil
-        @tail = node.prev
+
+      elsif node.key == key
+        if node.prev.nil? && node.next.nil?
+          node.key = nil
+          node.val = nil
+
+        elsif node.prev.nil? && node.next != nil
+          node.next.prev = nil
+          @head = node.next
+
+        elsif node.prev != nil && node.next.nil?
+          node.prev.next = nil
+          @tail = node.prev
+
+        elsif @tail.key != key
+          return nil
+
+        end
       end
+
       node = node.next
     end
   end
 
   def each
     node = @head
+
     loop do
       yield node
       node = node.next
