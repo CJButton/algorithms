@@ -18,7 +18,9 @@ class LRUCache
   # @map[key] is an alias for #get in hash_map
   def get(key)
     if @map[key]
-      update_link!(key)
+      link = @map[key]
+      update_link!(link)
+      link.val
     else
       calc!(key)
     end

@@ -1,8 +1,12 @@
 class BinaryMinHeap
+
   def initialize(&prc)
+    @store = []
+
   end
 
   def count
+    @store.length
   end
 
   def extract
