@@ -1,6 +1,5 @@
 class BinaryMinHeap
 
-  # default proc if one is not supplied
   def initialize(&prc)
     @store = []
     @prc = prc
@@ -12,10 +11,17 @@ class BinaryMinHeap
 
   def extract
     raise "no element to extract" if count == 0
+    val = store[0]
 
-    @store[0], @store[count - 1] = @store[count - 1], @store[0]
-    extracted = @store.pop
-    BinaryMinHeap.heapify_down(@store, 0, &prc)
+    if count > 1
+      store[0] = store.pop
+      self.class.heapify_down(store, 0, &prc)
+    else
+      # Last element left.
+      store.pop
+    end
+
+    val
 
   end
 
@@ -24,10 +30,8 @@ class BinaryMinHeap
   end
 
   def push(val)
-    @store << val
-
-    self.class.heapify_up(@store,
-    @store.length - 1, @store.length, &prc)
+    store << val
+    self.class.heapify_up(store, self.count - 1, &prc)
   end
 
   protected
@@ -69,6 +73,7 @@ class BinaryMinHeap
     end
 
     array[parent_idx], array[swap_idx] = array[swap_idx], array[parent_idx]
+
 
     heapify_down(array, swap_idx, len, &prc)
   end
