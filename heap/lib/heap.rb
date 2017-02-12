@@ -80,7 +80,7 @@ class BinaryMinHeap
 
   def self.heapify_up(array, child_idx, len = array.length, &prc)
     prc ||= Proc.new { |a, b| a <=> b }
-
+    
     return array if child_idx == 0
 
     parent_idx = parent_index(child_idx)
