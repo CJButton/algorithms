@@ -35,9 +35,11 @@ class QuickSort
     return array if length < 2
     # better solution is...
     pivot = partition(array, start, length, &prc)
+    # we need to know the smaller, partitioned lengths
     left = pivot - start
-    right =  pivot + 1
-
+    right =  length - (left + 1)
+    sort2!(array, start, left, &prc)
+    sort2!(array, pivot + 1, right, &prc)
 
     # return array if length < 2
     #
@@ -47,24 +49,6 @@ class QuickSort
     # right_length = length - (left_length + 1)
     # sort2!(array, start, left_length, &prc)
     # sort2!(array, pivot_idx + 1, right_length, &prc)
-
-
-    # I sense this is really not an ideal solution
-    # too many comparisons are getting made, although
-    # it does work
-
-    # swap = true
-    # until swap == false
-    #   swap = false
-    #
-    #   (start).upto(array.length - 2) do |i|
-    #     if array[i] > array[i + 1]
-    #       swap = true
-    #       QuickSort.partition(array, i, length, &prc)
-    #     end
-    #   end
-    # end
-    # array
 
   end
 
