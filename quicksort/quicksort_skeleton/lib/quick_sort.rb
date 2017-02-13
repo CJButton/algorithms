@@ -40,7 +40,7 @@ class QuickSort
     right =  length - (left + 1)
     sort2!(array, start, left, &prc)
     sort2!(array, pivot + 1, right, &prc)
-
+    array
     # return array if length < 2
     #
     # pivot_idx = partition(array, start, length, &prc)
@@ -53,6 +53,25 @@ class QuickSort
   end
 
   def self.partition(array, start, length, &prc)
+    prc ||= Proc.new { |el1, el2| el1 <=> el2 }
+
+   # To reduce probability of pathalogically bad data set, shuffle pivot.
+   # new_pivot = start + rand(length)
+   # array[start], array[new_pivot] = array[new_pivot], array[start]
+   #
+  #  pivot_idx = start
+  #  pivot = array[start]
+   #
+  #  ((start + 1)...(start + length)).each do |idx|
+  #    if prc.call(pivot, array[idx]) > 0
+  #      array[idx], array[pivot_idx + 1] = array[pivot_idx + 1], array[idx]
+  #      pivot_idx += 1
+  #    end
+  #  end
+  #  array[start], array[pivot_idx] = array[pivot_idx], array[start]
+  #  pivot_idx
+
+
     p "initial #{array}"
     prc ||= Proc.new {|a, b| a <=> b }
 
@@ -60,7 +79,7 @@ class QuickSort
     wall = nil
 
     (start + 1).upto(array.length - 1) do |idx|
-      if array[idx] < array[pivot]
+      if prc.call(array[idx], array[pivot]) < 1
         array[idx], array[pivot] = array[pivot], array[idx]
         pivot = idx
 
