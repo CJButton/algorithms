@@ -73,12 +73,12 @@ class QuickSort
 
 
     p "initial #{array}"
-    prc ||= Proc.new {|a, b| a <=> b }
+    prc ||= Proc.new { |a, b| a <=> b }
 
     pivot = start
     wall = nil
 
-    (start + 1).upto(array.length - 1) do |idx|
+    (start + 1).upto(length + start - 1) do |idx|
       if prc.call(array[idx], array[pivot]) < 1
         array[idx], array[pivot] = array[pivot], array[idx]
         pivot = idx
