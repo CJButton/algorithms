@@ -3,13 +3,15 @@ class BSTNode
   attr_reader :value
 
   def initialize(value)
-
+    @left = nil
+    @right = nil
+    @value = value
   end
 end
 
 class BinarySearchTree
   def initialize
-
+    @tree = []
   end
 
   def insert(value)
@@ -49,7 +51,7 @@ class BinarySearchTree
   end
 
   def self.insert!(node, value)
-
+    new_node = BSTNode.new(value)
   end
 
   def self.find!(node, value)

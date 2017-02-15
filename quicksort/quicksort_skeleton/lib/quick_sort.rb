@@ -36,6 +36,7 @@ class QuickSort
 
     pivot = partition(array, start, length, &prc)
     # we need to know the smaller, partitioned lengths
+    
     left = pivot - start
     right =  length - (left + 1)
     sort2!(array, start, left, &prc)
