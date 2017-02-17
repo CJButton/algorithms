@@ -20,7 +20,7 @@ class BinarySearchTree
   end
 
   def find(value)
-
+    BinarySearchTree.find!(@root, value)
   end
 
   def inorder
@@ -67,8 +67,9 @@ class BinarySearchTree
   end
 
   def self.find!(node, value)
-    return node if node.value == value
+    return nil if node.nil?
     return nil if node.left.nil? && node.right.nil?
+    return node if node.value == value
 
     value < node.value ?
     BinarySearchTree.find!(node.left, value) :
@@ -132,6 +133,22 @@ class BinarySearchTree
   end
 
   def self.delete_min!(node)
+    return nil if node.nil?
+    return nil if node.left.nil?
+
+    parent_node = nil
+    min_node = node
+    unless node.left.nil?
+      loop do
+        parent_node = min_node
+        min_node = node.left
+        break if min_node.left.nil?
+      end
+    end
+
+    unless min_node.right.nil?
+      parent_node.left = min_node.right
+    end
 
   end
 
@@ -143,5 +160,5 @@ class BinarySearchTree
 
 
 
-  
+
 end
