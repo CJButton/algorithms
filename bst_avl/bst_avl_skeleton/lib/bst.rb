@@ -11,11 +11,12 @@ end
 
 class BinarySearchTree
   def initialize
-    @tree = []
+    @root = nil
   end
 
   def insert(value)
-
+    @root.nil? ? @root = BSTNode.new(value) :
+    self.class.insert!(@root, value)
   end
 
   def find(value)
@@ -35,15 +36,13 @@ class BinarySearchTree
   end
 
   def height
-
+    BinarySearchTree.height!(@root)
   end
 
   def min
-
   end
 
   def max
-
   end
 
   def delete(value)
@@ -51,10 +50,29 @@ class BinarySearchTree
   end
 
   def self.insert!(node, value)
-    new_node = BSTNode.new(value)
+    return BSTNode.new(value) if node.nil?
+
+    if value <= node.value
+      node.left.nil? ?
+      node.left = BSTNode.new(value) :
+      BinarySearchTree.insert!(node.left, value)
+    elsif value > node.value
+      node.right.nil? ?
+      node.right = BSTNode.new(value) :
+      BinarySearchTree.insert!(node.right, value)
+    end
+
+    node
+
   end
 
   def self.find!(node, value)
+    return node if node.value == value
+    return nil if node.left.nil? && node.right.nil?
+
+    value < node.value ?
+    BinarySearchTree.find!(node.left, value) :
+    BinarySearchTree.find!(node.right, value)
 
   end
 
@@ -71,15 +89,46 @@ class BinarySearchTree
   end
 
   def self.height!(node)
+    return -1 if node.nil?
+    return 0 if node.left.nil? && node.right.nil?
+
+    min_height = 0
+    max_height = 0
+
+    loop_node = node
+
+    unless node.left.nil?
+      loop do
+        break if loop_node.left.nil?
+        min_height += 1
+        loop_node = loop_node.left
+      end
+    end
+
+    unless node.right.nil?
+      loop do
+        break if loop_node.right.nil?
+        max_height += 1
+        loop_node = loop_node.right
+      end
+    end
+
+    [min_height, max_height].max
 
   end
 
   def self.max(node)
+    return nil if node.nil?
+    return node if node.right.nil?
 
+    BinarySearchTree.max(node.right)
   end
 
   def self.min(node)
+    return nil if node.nil?
+    return node if node.left.nil?
 
+    BinarySearchTree.min(node.left)
   end
 
   def self.delete_min!(node)
@@ -89,4 +138,10 @@ class BinarySearchTree
   def self.delete!(node, value)
 
   end
+
+
+
+
+
+  
 end
