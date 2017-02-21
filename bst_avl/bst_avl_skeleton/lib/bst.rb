@@ -148,19 +148,23 @@ class BinarySearchTree
 
   def self.find_parent(node, value)
 
-    unless node.left.nil?
-      return [node, node.left] if node.left.value == value
+    loop do
+      unless node.left.nil?
+        return [node, node.left] if node.left.value == value
 
-      if value <= node.value
-        BinarySearchTree.find_parent(node.left, value)
+        if value <= node.value
+          node = node.left
+          # BinarySearchTree.find_parent(node.left, value)
+        end
       end
-    end
 
-    unless node.right.nil?
-      return [node, node.right] if node.right.value == value
+      unless node.right.nil?
+        return [node, node.right] if node.right.value == value
 
-      if value > node.value
-        BinarySearchTree.find_parent(node.right, value)
+        if value > node.value
+          node = node.right
+          # BinarySearchTree.find_parent(node.right, value)
+        end
       end
     end
 
@@ -168,15 +172,14 @@ class BinarySearchTree
 
   def self.delete!(node, value)
     return nil if node.nil?
-    return node = nil if node.value = value
+    return node = nil if node.value == value
     # we need to keep track of the parent node
-
     parent, child = BinarySearchTree.find_parent(node, value)
     # 3 cases:
     # 1. no children
-
-
-
+    if child.right.nil? && child.left.nil?
+      parent.left == child ? parent.left = nil : parent.right = nil
+    end
 
     # 2. one child
     # 3. two children!
