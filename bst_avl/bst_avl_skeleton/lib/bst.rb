@@ -27,7 +27,7 @@ class BinarySearchTree
   end
 
   def inorder
-
+    BinarySearchTree.inorder!(@root)
   end
 
   def postorder
@@ -43,9 +43,11 @@ class BinarySearchTree
   end
 
   def min
+    BinarySearchTree.min(@root)
   end
 
   def max
+    BinarySearchTree.max(@root)
   end
 
   def delete(value)
@@ -100,7 +102,7 @@ class BinarySearchTree
     return 0 if node.left.nil? && node.right.nil?
 
     min_height = 0
-    max_height = 0
+    max_height = 1
 
     loop_node = node
 
