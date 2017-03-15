@@ -46,13 +46,21 @@ class AVLTree
   end
 
   def self.insert!(node, value, done)
+    # unless @root has already been established
     return [AVLTreeNode.new(value), false] unless node
 
     dir = value < node.value ? 0 : 1
 
+    # parent's subtree node is set to child
+    # done is set to fault after new node is created
+    # node = 3
+    # node.subtrees[dir] = 1
+    # done = false
     node.subtrees[dir], done = AVLTree.insert!(node.subtrees[dir], value, done)
 
+    # false
     unless done
+      # checking the parent's node balance
       node.balance += (dir == 0 ? -1 : 1)
 
       if node.balance == 0
@@ -232,7 +240,8 @@ class AVLTree
        left_height = AVLTree.height!(root.subtrees[dir])
        right_height = AVLTree.height!(root.subtrees(other_dir))
 
-       if (left_height - right_height) >= 2
+       # we need abs function here?
+       if (left_height - right_height).abs >= 2
          a = root.subtrees[dir].subtrees[dir]
          b = root.subtrees[dir].subtrees[other_dir]
 
@@ -251,7 +260,8 @@ class AVLTree
 
        root.balance = max + 1
      end
-
+     # an array is returned, as this will pop back up into the next
+     # stack frame, until we reach the root of the tree
      [root, done]
    end
 
