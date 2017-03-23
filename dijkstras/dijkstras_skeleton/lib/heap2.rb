@@ -1,3 +1,5 @@
+
+
 # This is an advanced version of the heap code from before with a
 # `reduce!` method. Effectively this just maintains an `index_map`
 # that associates values with indices in the heap.

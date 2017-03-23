@@ -3,6 +3,7 @@ require 'byebug'
 
 # O(|V|**2 + |E|).
 def dijkstra1(source)
+  # the shortest path yet found to each vertex
   locked_in_paths = {}
   possible_paths = {
     source => { cost: 0, last_edge: nil }
@@ -25,6 +26,7 @@ def dijkstra1(source)
     update_possible_paths(vertex, locked_in_paths, possible_paths)
   end
 
+  # shortest path yet found to each vertex
   locked_in_paths
 end
 

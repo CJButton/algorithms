@@ -3,6 +3,8 @@ class Vertex
 
   def initialize(value)
     @value, @in_edges, @out_edges = value, [], []
+    # in_edges = indegree
+    # out_edges = outdegree
   end
 end
 
@@ -14,6 +16,7 @@ class Edge
     self.to_vertex = to_vertex
     self.cost = cost
 
+    # place the edges with their appropriate vertexes
     to_vertex.in_edges << self
     from_vertex.out_edges << self
   end
