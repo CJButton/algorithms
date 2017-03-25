@@ -29,3 +29,7 @@ function digital_root(num) {
 
 }
 digital_root(12345);
+
+// ['a', .. , 'z']
+Array.apply(null, {length: 26})
+    .map(function (x,i) { return String.fromCharCode(97 + i) });

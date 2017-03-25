@@ -1,6 +1,7 @@
 
 
 
+# Digital Root
 def split_integer(num)
   # first, we need to split the digits, but WITHOUT turning them into
   # strings! Instead, we can use good old modulo!
@@ -23,4 +24,28 @@ def digital_root(num)
 
 end
 
-p digital_root(12345)
+# digital_root(12345)
+
+#-----------
+# Caesar Shift
+
+def caesar_shift(phrase)
+
+
+end
+
+
+def encode_word(word)
+
+
+
+
+
+
+
+
+
+
+
+
+end
