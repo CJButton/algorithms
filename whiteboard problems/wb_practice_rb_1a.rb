@@ -70,9 +70,6 @@ def caesar_shift(phrase, shift)
   end
 
   encoded.join(" ")
-
-
-
 end
 # all successful
 # p caesar_shift("abcd", 1) # => "bcde"
