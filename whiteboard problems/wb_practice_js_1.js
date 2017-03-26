@@ -38,7 +38,6 @@ function caesarShift(phrase, shift) {
   let coded = [];
 
   let alphabet = [];
-
   for (var i = "a".charCodeAt(); i < "z".charCodeAt(); i++) {
     alphabet.push(i);
   }
@@ -55,16 +54,21 @@ function caesarShift(phrase, shift) {
     splitWord.forEach((letter) => {
       let letterIdx = alphabet.indexOf(letter.toLowerCase().charCodeAt());
 
-      // need a check here for elements besides letters
-      letter === letter.toLowerCase() ?
-          codedWord.push(String.fromCharCode(shifted[letterIdx])) :
-          codedWord.push(String.fromCharCode(shifted[letterIdx])).toUpperCase();
-
+      if (!shifted.includes(letter.toLowerCase().charCodeAt())) {
+        codedWord.push(letter);
+      } else {
+        letter === letter.toLowerCase() ?
+                codedWord.push(String.fromCharCode(shifted[letterIdx])) :
+                codedWord.push(String.fromCharCode(shifted[letterIdx]).toUpperCase());
+      }
     })
+
+    coded.push(codedWord.join(""));
 
   })
 
 
+  console.log(coded.join(" "));
 
 }
 
