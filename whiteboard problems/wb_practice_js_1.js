@@ -50,7 +50,15 @@ function caesarShift(phrase, shift) {
     let codedWord = [];
     let splitWord = word.split("");
 
+    // be super careful about difference between indexOf and findIndex
+    // former only needs element, latter wants a callback
     splitWord.forEach((letter) => {
+      let letterIdx = alphabet.indexOf(letter.toLowerCase().charCodeAt());
+
+      // need a check here for elements besides letters
+      letter === letter.toLowerCase() ?
+          codedWord.push(String.fromCharCode(shifted[letterIdx])) :
+          codedWord.push(String.fromCharCode(shifted[letterIdx])).toUpperCase();
 
     })
 
