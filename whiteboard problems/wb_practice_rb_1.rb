@@ -76,3 +76,48 @@ end
 # p caesar_shift("abc def", 1) # => "bcd efg"
 # p caesar_shift("z", 1) # => "a"
 # p caesar_shift("hyphenated-woRd! and SpaCEs", 1)
+
+
+#-------------------------
+# Dynamic Programming Example:
+
+def make_matrix(str1, str2)
+  matrix = Array.new(str1.length + 1) { Array.new(str2.length + 1, 0) }
+
+  str1.chars.each_with_index do |el1, idx1|
+    str2.chars.each_with_index do |el2, idx2|
+      if el1 == el2
+        matrix[idx1 + 1][idx2 + 1] = matrix[idx1][idx2] + 1
+      else
+        matrix[idx1 + 1][idx2 + 1] = 0
+      end
+    end
+  end
+
+  matrix
+end
+# str1 = "abba", str2 = "abbd"
+
+# [[0, 0, 0, 0, 0],
+#  [0, 1, 0, 0, 0],
+#  [0, 0, 2, 1, 0],
+#  [0, 0, 1, 3, 0],
+#  [0, 1, 0, 0, 0]]
+
+def longest_common_substring(str1, str2)
+  matrix = make_matrix(str1, str2)
+  greatest_substring = ""
+  matrix.each_with_index do |row, idx1|
+    row.each_with_index do |length, idx2|
+      if length > greatest_substring.length
+        greatest_substring = str2[idx2 - length...idx2]
+      end
+    end
+  end
+
+  greatest_substring
+end
+
+p find_longest_substring("abba", "abbc")
+p find_longest_substring("chika", "christopher")
+p find_longest_substring("ddcbr, rddcbrwz")

@@ -42,7 +42,7 @@ function caesarShift(phrase, shift) {
     alphabet.push(i);
   }
 
-  // very letter is now in it's appropriate shifted place
+  // every letter is now in it's appropriate shifted place
   let shifted = alphabet.slice(shift).concat(alphabet.slice(0, shift));
 
   words.forEach((word) => {
@@ -71,8 +71,68 @@ function caesarShift(phrase, shift) {
   console.log(coded.join(" "));
 
 }
+//
+// caesarShift("abcd", 1)
+// caesarShift("abc def", 1)
+// caesarShift("z", 1)
+// caesarShift("hyphenated-woRd! and SpaCEs", 1)
+//---------------------------------------
+const makeMatrix = function(str1, str2) {
 
-caesarShift("abcd", 1)
-caesarShift("abc def", 1)
-caesarShift("z", 1)
-caesarShift("hyphenated-woRd! and SpaCEs", 1)
+  let matrix = [];
+  for (let i = 0; i < str1.length + 1; i++) {
+    matrix.push([]);
+  }
+  matrix.forEach((arr) => {
+    for(let j = 0; j < str2.length + 1; j++) {
+      arr.push(0);
+    }
+  });
+
+  str1.split("").forEach((el, idx) => {
+    str2.split("").forEach((el2, idx2) => {
+      if (el === el2) {
+        matrix[idx + 1][idx2 + 1] = (matrix[idx][idx2]) + 1
+      } else {
+        matrix[idx + 1][idx2 + 1] = 0;
+      }
+    })
+  });
+
+  let longestSubArray = "";
+
+  matrix.forEach((row, idx1) => {
+    row.forEach((length, idx2) => {
+      if (length > longestSubArray.length) {
+        longestSubArray = str1.slice(idx2 - length, idx2)
+      }
+    })
+  })
+  console.log(longestSubArray);
+
+}
+makeMatrix("abba", "abbc")
+
+//
+// def make_matrix(str1, str2)
+//   matrix = Array.new(str1.length + 1) { Array.new(str2.length + 1, 0) }
+//
+//   str1.chars.each_with_index do |el1, idx1|
+//     str2.chars.each_with_index do |el2, idx2|
+//       if el1 == el2
+//         matrix[idx1 + 1][idx2 + 1] = matrix[idx1][idx2] + 1
+//       else
+//         matrix[idx1 + 1][idx2 + 1] = 0
+//       end
+//     end
+//   end
+//
+//   matrix
+// end
+// # str1 = "abba", str2 = "abbd"
+//
+// # [[0, 0, 0, 0, 0],
+// #  [0, 1, 0, 0, 0],
+// #  [0, 0, 2, 1, 0],
+// #  [0, 0, 1, 3, 0],
+// #  [0, 1, 0, 0, 0]]
