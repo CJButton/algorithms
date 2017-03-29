@@ -96,13 +96,6 @@ def make_matrix(str1, str2)
 
   matrix
 end
-# str1 = "abba", str2 = "abbd"
-
-# [[0, 0, 0, 0, 0],
-#  [0, 1, 0, 0, 0],
-#  [0, 0, 2, 1, 0],
-#  [0, 0, 1, 3, 0],
-#  [0, 1, 0, 0, 0]]
 
 def longest_common_substring(str1, str2)
   matrix = make_matrix(str1, str2)

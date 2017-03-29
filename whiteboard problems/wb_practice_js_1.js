@@ -112,27 +112,3 @@ const makeMatrix = function(str1, str2) {
 
 }
 makeMatrix("abba", "abbc")
-
-//
-// def make_matrix(str1, str2)
-//   matrix = Array.new(str1.length + 1) { Array.new(str2.length + 1, 0) }
-//
-//   str1.chars.each_with_index do |el1, idx1|
-//     str2.chars.each_with_index do |el2, idx2|
-//       if el1 == el2
-//         matrix[idx1 + 1][idx2 + 1] = matrix[idx1][idx2] + 1
-//       else
-//         matrix[idx1 + 1][idx2 + 1] = 0
-//       end
-//     end
-//   end
-//
-//   matrix
-// end
-// # str1 = "abba", str2 = "abbd"
-//
-// # [[0, 0, 0, 0, 0],
-// #  [0, 1, 0, 0, 0],
-// #  [0, 0, 2, 1, 0],
-// #  [0, 0, 1, 3, 0],
-// #  [0, 1, 0, 0, 0]]
