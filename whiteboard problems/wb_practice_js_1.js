@@ -111,4 +111,19 @@ const makeMatrix = function(str1, str2) {
   console.log(longestSubArray);
 
 }
-makeMatrix("abba", "abbc")
+// makeMatrix("abba", "abbc")
+
+//-------------------------------------------
+
+// Write a function that takes an array of integers and returns their sum. Use recursion.
+function sumRec(arr) {
+
+  if (arr.length === 0) {
+    return 0;
+  }
+
+  // don't forget your returns!!!
+  return arr[0] + sumRec(arr.slice(1));
+
+}
+// console.log(sumRec([1, 2, 3, 4, 5]));

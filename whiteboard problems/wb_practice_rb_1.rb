@@ -111,6 +111,15 @@ def longest_common_substring(str1, str2)
   greatest_substring
 end
 
-p find_longest_substring("abba", "abbc")
-p find_longest_substring("chika", "christopher")
-p find_longest_substring("ddcbr, rddcbrwz")
+# p longest_common_substring("abba", "abbc")
+# p longest_common_substring("chika", "christopher")
+# p longest_common_substring("ddcbr", "rddcbrwz")
+
+#------------------------
+# Write a function that takes an array of integers and returns their sum. Use recursion.
+def sum_rec(arr)
+  return 0 if arr.empty?
+  arr[0] += sum_rec(arr.drop(1))
+end
+
+p sum_rec([1, 2, 3, 4, 5]) # 15
