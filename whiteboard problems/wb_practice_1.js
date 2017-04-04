@@ -10,7 +10,6 @@ function get_digits(num) {
   }
 
   return digits;
-
 }
 
 function digital_root(num) {
