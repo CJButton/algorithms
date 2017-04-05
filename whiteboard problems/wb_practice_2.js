@@ -26,30 +26,47 @@ function palindrome(string) {
   return true;
 
 }
-//
-//
 // console.log(palindrome("dog"));
 // console.log(palindrome("abba"));
 // console.log(palindrome("aaaaaabbaaaaaa"));
 
 
-
+// be wary when using foreach, as a return there will not stop there
+// entire function, but rather just the forEach loop
 function valid_ip(ip) {
 
   let splitIp = ip.split(".");
   if (splitIp.length !== 4) return false;
 
-  splitIp.forEach((el) => {
-    if (typeof(parseInt(el)) !== "number") {
-      return false;
-    } else if (parseInt(el) < 0 || parseInt(el) > 255) {
+
+  for (let i = 0; i < splitIp.length; i++) {
+    if (typeof(parseInt(splitIp[i])) !== "number") return false;
+
+    if (parseInt(splitIp[i]) > 255 || parseInt(splitIp[i] < 0)) {
       return false;
     }
-  });
-
-
+  }
+  return true;
 
 }
 // console.log(valid_ip("255.255.255.255"));
 // console.log(valid_ip("255.255.255"));
-console.log(valid_ip("256.255.255.256"));
+// console.log(valid_ip("256.255.255.256"));
+
+function shuffle(arr) {
+  if (arr.length < 2) return arr;
+
+  let jumbled = [];
+  let arrSize = arr.length
+
+  for (let i = arr.length; i > 0; i--) {
+
+    let rand = Math.floor(Math.random() * arr.length);
+    jumbled.push(arr.splice(rand, 1)[0]);
+
+  }
+  return jumbled;
+
+}
+
+console.log(shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
