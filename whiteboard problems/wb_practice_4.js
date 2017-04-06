@@ -60,12 +60,10 @@ function sillyHelper(year) {
     return true;
   }
   return false;
-
 }
 
 function sillyYears(year) {
   if (year < 1000) return null;
-
   let years = [];
 
   while (years.length < 10) {
@@ -79,3 +77,35 @@ function sillyYears(year) {
 }
 
 console.log(sillyYears(1978));
+
+// pair sum
+// Given an array of integers, return all pairs that sum up to a
+// specified value k. List the pairs in [min, max] order.
+function pairSum(arr, tgt) {
+
+  let allPairs = [];
+
+  let seen = new Set;
+
+  arr.forEach((el) => {
+    // now we know the missing number we need to complete the triple!
+    let target = tgt - el;
+
+    if (seen.has(target)) {
+      let mini = [];
+      let min = Math.min(target, el);
+      let max = Math.max(target, el)
+
+      mini.push(min);
+      mini.push(max);
+      allPairs.push(mini);
+    }
+
+    seen.add(el);
+
+  });
+  return allPairs;
+}
+
+
+console.log(pairSum([1, 2, -1, -1, -2], -1));
