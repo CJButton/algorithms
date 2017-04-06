@@ -36,3 +36,46 @@ function largestSubSum(arr) {
 }
 
 console.log(largestSubSum([5, 3, -7, 6]));
+
+// silly years
+// Write a function that takes a year (four digit integer) and returns an
+// array with the 10 closest subsequent years that meet the following
+// condition: the first two digits summed with the last two digits are
+// equal to the middle two digits
+
+// 1978 => 19 + 78 = 97
+// 2307 => 23 + 07 = 30
+
+// steps we need to take:
+// 1. get back 2 integers and add together
+// 2. get front 2 integers and add together
+// 3. compare to the middle two
+function sillyHelper(year) {
+  // 1987
+  let strYear = year.toString();
+  let back = strYear.slice(2);
+  let front = strYear.slice(0, 2);
+  let middle = strYear.slice(1, 3);
+  if (parseInt(back) + parseInt(front) == middle) {
+    return true;
+  }
+  return false;
+
+}
+
+function sillyYears(year) {
+  if (year < 1000) return null;
+
+  let years = [];
+
+  while (years.length < 10) {
+    if (sillyHelper(year) === true) {
+      years.push(year);
+    }
+    year += 1;
+  }
+  return years;
+
+}
+
+console.log(sillyYears(1978));
