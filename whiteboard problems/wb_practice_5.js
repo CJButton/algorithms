@@ -1,4 +1,6 @@
 
+
+
 // Productify
 // given an array of numbers, replace all the numbers with the product
 // of all the other numbers
