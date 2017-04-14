@@ -1,4 +1,12 @@
 
+const manacher = (string) => {
+
+  
+
+}
+
+console.log(manacher("acapella")); // should return [0, 2]
+
 
 // Write a function that will take a string and return the indices of
 // the start/end of the longest palindrome it contains.
@@ -23,7 +31,7 @@ const longestPalindrome = (string) => {
 
 }
 
-console.log(longestPalindrome('acapella')); // should return [0, 2]
+// console.log(longestPalindrome('acapella')); // should return [0, 2]
 
 
 // find all subsets of an array
