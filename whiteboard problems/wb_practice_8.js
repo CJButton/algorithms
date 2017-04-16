@@ -1,4 +1,43 @@
 
+
+// Binary Max-Heap
+class BinaryMaxHeap {
+  constructor() {
+    this.content = [];
+  }
+
+  push(el) {
+    this.content.push(el);
+    this.bubbleup(el);
+  }
+
+  // inserting a new object into the heap
+  bubbleup(el) {
+    let prnt = this.parent();
+    console.log(`${el}'s parent is ${prnt}`);
+
+  }
+
+  parent() {
+    let parentN = Math.floor((this.content.length + 1) / 2) - 1;
+    let parent = this.content[parentN];
+    if (this.content.length === 1) {
+      return null;
+    } else {
+      return parent;
+    }
+
+  }
+
+}
+
+let heap = new BinaryMaxHeap();
+heap.push(5)
+heap.push(6)
+heap.push(4)
+heap.push(3)
+console.log(heap);
+
 // I give you a scrambled list of n unique integers between 0 and n.
 // Tell me what number is missing.
 
