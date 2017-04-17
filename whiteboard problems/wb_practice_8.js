@@ -11,7 +11,6 @@ class BinaryMaxHeap {
     this.bubbleup(this.content.length - 1, el);
   }
 
-  // inserting a new object into the heap
   bubbleup(childIdx, el) {
     let prnt = this.parent(childIdx);
 
@@ -31,12 +30,42 @@ class BinaryMaxHeap {
 
   bubbledown(idx, el) {
     let children = this.children(idx);
+    // swap with greater of the two children (if two are present)
+
+    let max;
+    max = (this.content[children[0]] < this.content[children[1]]) ?
+        children[1] : children[0]
+
+          console.log(`The max is ${max}`);
+
+
+
+    // if (this.content[children[0]] > el) {
+    //   let swap = this.content[children[0]];
+    //   this.content[children[0]] = el;
+    //   this.content[idx] = swap;
+    //   this.bubbledown(children[0], el);
+    // }
+    // else if (this.content[children[1]] > el) {
+    //   let swap = this.content[children[1]];
+    //   this.content[children[1]] = el;
+    //   this.content[idx] = swap;
+    //   this.bubbledown(children[1], el);
+    // }
   }
 
   children(idx) {
     let left = (idx * 2) + 1;
     let right = (idx * 2) + 2;
-    return [left, right];
+    let kids = [];
+    if (left < this.content.length - 1) {
+      kids.push(left);
+    }
+    if (right < this.content.length - 1) {
+      kids.push(right);
+    }
+    console.log(kids);
+    return kids;
 
   }
 
@@ -60,8 +89,19 @@ heap.push(4)
 heap.push(3)
 heap.push(7)
 heap.push(8)
+console.log(heap.content);
 heap.delete();
-console.log(heap);
+// console.log(heap);
+// heap.delete();
+// console.log(heap);
+// heap.delete();
+// console.log(heap);
+// heap.delete();
+// console.log(heap);
+// heap.delete();
+// console.log(heap);
+
+
 
 // I give you a scrambled list of n unique integers between 0 and n.
 // Tell me what number is missing.
