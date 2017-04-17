@@ -3,7 +3,8 @@
 // Binary Max-Heap
 class BinaryMaxHeap {
   constructor() {
-    this.content = [];
+    this.content = [],
+    this.head = null;
   }
 
   push(el) {
@@ -20,6 +21,8 @@ class BinaryMaxHeap {
       this.content[prnt] = el;
       this.bubbleup(prnt, el)
     }
+    // we need to update the head, in case it has changed
+    this.head = this.content[0];
   }
 
   delete() {
@@ -74,21 +77,28 @@ class BinaryMaxHeap {
 let heap = new BinaryMaxHeap();
 heap.push(5)
 heap.push(6)
+// heap.push(22)
 heap.push(4)
 heap.push(3)
 heap.push(7)
-heap.push(8)
+// heap.push(8)
+console.log(heap.head);
+// heap.push(15)
+// heap.push(16)
+// heap.push(17)
+// heap.push(11)
+// heap.push(12)
 console.log(heap.content);
-heap.delete();
-console.log(heap.content);
-heap.delete();
-console.log(heap.content);
-heap.delete();
-console.log(heap.content);
-heap.delete();
-console.log(heap.content);
-heap.delete();
-console.log(heap.content);
+// heap.delete();
+// console.log(heap.content);
+// heap.delete();
+// console.log(heap.content);
+// heap.delete();
+// console.log(heap.content);
+// heap.delete();
+// console.log(heap.content);
+// heap.delete();
+// console.log(heap.content);
 
 // I give you a scrambled list of n unique integers between 0 and n.
 // Tell me what number is missing.
