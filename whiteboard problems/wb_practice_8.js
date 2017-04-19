@@ -1,5 +1,154 @@
 
 
+// Bonus Stack:
+// Implement a stack with a method max that returns the maximum value of
+// the stack. max should run in O(1) time, no matter what operations are
+// performed on the stack.
+
+class MinMaxStack {
+  constructor() {
+    this.stack = [];
+  }
+
+  minNum() {
+    if (this.stack.length === 0) return "stack is empty"
+
+    return this.stack[this.stack.length - 1].min;
+  }
+
+  maxNum() {
+    if (this.stack.length === 0) return "stack is empty"
+
+    return this.stack[this.stack.length - 1].max;
+  }
+
+  push(el) {
+    if (this.stack.length === 0) {
+      this.stack.push({val: el, max: el, min: el});
+    } else {
+      this.stack.push({
+        val: el,
+        max: Math.max(this.stack[this.stack.length - 1].max, el),
+        min: Math.min(this.stack[this.stack.length - 1].min, el)
+      });
+
+    }
+  }
+
+  pop() {
+    this.stack.pop();
+  }
+
+}
+
+let stack = new MinMaxStack();
+// stack.push(5);
+// stack.push(6);
+// stack.push(3);
+// stack.push(4);
+// stack.push(2);
+// stack.push(1);
+// console.log(stack.maxNum());
+// stack.push(2);
+// stack.pop();
+// console.log(stack.minNum());
+// console.log(stack.maxNum());
+// console.log(stack.stack);
+// console.log(stack.max);
+
+
+
+
+// Stack Queue
+// Implement a queue using stacks. That is, write enqueue and dequeue
+// using only push and pop operations.
+// FIFO
+
+// In terms of performance, enqueue should be O(1), but dequeue may be
+// worst-case O(n). In terms of ammortized time, dequeue should be O(1).
+// Prove that your solution accomplishes this.
+
+class StackQueue {
+  constructor() {
+    this.queue = [];
+    this.out = [];
+  }
+
+  enqueue(el) {
+    this.queue.push(el);
+  }
+
+  dequeue() {
+    if (this.out.length === 0) {
+      for (var i = this.queue.length; i > 0; i--) {
+        this.out.push(this.queue.pop());
+      }
+    }
+    this.out.pop();
+  }
+
+}
+
+
+const q = new StackQueue;
+// q.enqueue(5);
+// q.enqueue(6);
+// q.enqueue(7);
+// q.enqueue(8);
+// q.enqueue(9);
+// console.log(q.queue);
+// q.dequeue();
+// console.log(q.queue);
+// console.log(q.out);
+
+// But wait - isn't moving every item from our @in stack to the @out
+// stack an O(n) operation? Does this make dequeueing an O(n) operation?
+// While toppling the stack is an O(n) operation, each O(n) operation
+// gives us n free dequeues. Since we get n free dequeues for every O(n)
+// topple and n / n is 1, dequeueing is an O(1) amortized operation.
+
+
+
+
+// Windowed Max Range
+// Given an array, and a window size w, find the maximum max - min
+// within a range of w elements.
+
+const windowed = (arr, wind) => {
+
+  let nums = new MinMaxStack();
+  // preload the stack
+  for (var i = 0; i < wind; i++) {
+    nums.push(arr[i]);
+  }
+
+  let maxFound = nums.maxNum() - nums.minNum();
+
+  for (var j = wind; j < arr.length; j++) {
+  }
+  // return maxFound;
+
+}
+
+
+console.log(windowed([1, 0, 2, 5, 4, 8], 2));
+// console.log(windowed([1, 0, 2, 5, 4, 8], 3));
+// console.log(windowed([1, 0, 2, 5, 4, 8], 4));
+// console.log(windowed([1, 0, 2, 5, 4, 8], 5));
+//
+// windowed_max_range([1, 0, 2, 5, 4, 8], 2) == 4 # 4, 8
+// windowed_max_range([1, 0, 2, 5, 4, 8], 3) == 5 # 0, 2, 5
+// windowed_max_range([1, 0, 2, 5, 4, 8], 4) == 6 # 2, 5, 4, 8
+// # still 6!
+// windowed_max_range([1, 3, 2, 5, 4, 8], 5) == 6 # 3, 2, 5, 4, 8
+
+
+
+
+
+
+
+
 // Binary Max-Heap
 class BinaryMaxHeap {
   constructor() {
@@ -75,20 +224,20 @@ class BinaryMaxHeap {
 }
 
 let heap = new BinaryMaxHeap();
-heap.push(5)
-heap.push(6)
+// heap.push(5)
+// heap.push(6)
 // heap.push(22)
-heap.push(4)
-heap.push(3)
-heap.push(7)
+// heap.push(4)
+// heap.push(3)
+// heap.push(7)
 // heap.push(8)
-console.log(heap.head);
+// console.log(heap.head);
 // heap.push(15)
 // heap.push(16)
 // heap.push(17)
 // heap.push(11)
 // heap.push(12)
-console.log(heap.content);
+// console.log(heap.content);
 // heap.delete();
 // console.log(heap.content);
 // heap.delete();
