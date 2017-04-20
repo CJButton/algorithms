@@ -89,7 +89,9 @@ class StackQueue {
       mins.push(this.out.stack[this.out.stack.length - 1].min);
     }
 
-    return Math.min(mins);
+    return mins.reduce((a, b) => {
+      return Math.max(a, b);
+    })
   }
 
   max() {
@@ -102,7 +104,9 @@ class StackQueue {
       maxes.push(this.out.stack[this.out.stack.length - 1].max);
     }
 
-    return Math.max(maxes);
+    return maxes.reduce((a, b) => {
+      return Math.max(a, b);
+    })
   }
 
   enqueue(el) {
@@ -153,21 +157,25 @@ const windowed = (arr, wind) => {
     nums.enqueue(arr[i]);
   }
 
+  let current = max - min;
+  nums.dequeue();
   let max = nums.max();
   let min = nums.min();
-  let current = max - min;
-  console.log(current);
 
-  for (var i = wind; i < arr.length; i++) {
-    
-  }
-
+  // for (var i = wind; i < arr.length; i++) {
+  //   nums.enqueue(arr[i]);
+  //   windowMax = nums.max() - nums.min()
+    // console.log(nums.max());
+    // console.log(nums.min());
+  //
+  // }
+  // return current;
 
 }
 
 
-console.log(windowed([1, 0, 2, 5, 4, 8], 2));
-// console.log(windowed([1, 0, 2, 5, 4, 8], 3));
+// console.log(windowed([1, 0, 2, 5, 4, 8], 2));
+console.log(windowed([1, 0, 2, 5, 4, 8], 3));
 // console.log(windowed([1, 0, 2, 5, 4, 8], 4));
 // console.log(windowed([1, 0, 2, 5, 4, 8], 5));
 //
