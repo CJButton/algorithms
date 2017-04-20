@@ -4,6 +4,7 @@
 // Implement a stack with a method max that returns the maximum value of
 // the stack. max should run in O(1) time, no matter what operations are
 // performed on the stack.
+// FILO
 
 class MinMaxStack {
   constructor() {
@@ -31,12 +32,11 @@ class MinMaxStack {
         max: Math.max(this.stack[this.stack.length - 1].max, el),
         min: Math.min(this.stack[this.stack.length - 1].min, el)
       });
-
     }
   }
 
   pop() {
-    this.stack.pop();
+    return this.stack.pop();
   }
 
 }
@@ -49,6 +49,7 @@ let stack = new MinMaxStack();
 // stack.push(2);
 // stack.push(1);
 // console.log(stack.maxNum());
+// console.log(stack.stack);
 // stack.push(2);
 // stack.pop();
 // console.log(stack.minNum());
@@ -70,36 +71,37 @@ let stack = new MinMaxStack();
 
 class StackQueue {
   constructor() {
-    this.queue = [];
-    this.out = [];
+    this.in = new MinMaxStack();
+    this.out = new MinMaxStack();
   }
 
   enqueue(el) {
-    this.queue.push(el);
+    this.in.push(el);
   }
 
   dequeue() {
-    if (this.out.length === 0) {
-      for (var i = this.queue.length; i > 0; i--) {
-        this.out.push(this.queue.pop());
+    if (this.out.stack.length === 0) {
+      for (var i = this.in.stack.length - 1; i >= 0; i--) {
+        this.out.push(this.in.pop().val);
       }
     }
-    this.out.pop();
+    this.out.pop()
   }
 
 }
 
 
 const q = new StackQueue;
-// q.enqueue(5);
-// q.enqueue(6);
-// q.enqueue(7);
-// q.enqueue(8);
-// q.enqueue(9);
-// console.log(q.queue);
-// q.dequeue();
-// console.log(q.queue);
-// console.log(q.out);
+q.enqueue(5);
+q.enqueue(6);
+q.enqueue(7);
+q.enqueue(8);
+q.enqueue(9);
+q.dequeue();
+console.log(q.in);
+console.log(q.out);
+
+
 
 // But wait - isn't moving every item from our @in stack to the @out
 // stack an O(n) operation? Does this make dequeueing an O(n) operation?
