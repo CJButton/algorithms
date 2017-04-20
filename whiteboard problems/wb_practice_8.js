@@ -76,7 +76,7 @@ class StackQueue {
   }
 
   length() {
-    return this.in.length + this.out.length
+    return this.in.stack.length + this.out.stack.length
   }
 
   min() {
@@ -85,12 +85,13 @@ class StackQueue {
     if (this.in.stack.length > 0) {
       mins.push(this.in.stack[this.in.stack.length - 1].min);
     }
+
     if (this.out.stack.length > 0) {
       mins.push(this.out.stack[this.out.stack.length - 1].min);
     }
 
     return mins.reduce((a, b) => {
-      return Math.max(a, b);
+      return Math.min(a, b);
     })
   }
 
@@ -100,6 +101,7 @@ class StackQueue {
     if (this.in.stack.length > 0) {
       maxes.push(this.in.stack[this.in.stack.length - 1].max);
     }
+
     if (this.out.stack.length > 0) {
       maxes.push(this.out.stack[this.out.stack.length - 1].max);
     }
@@ -152,33 +154,34 @@ const q = new StackQueue;
 const windowed = (arr, wind) => {
 
   let nums = new StackQueue();
+  let currentMax = null;
 
-  for (var i = 0; i < wind; i++) {
-    nums.enqueue(arr[i]);
+
+  for (var i = 0; i <= arr.length; i++) {
+    if (i < wind) {
+      nums.enqueue(arr[i]);
+    }
+
+    if (i >= wind) {
+      windowMax = (nums.max() - nums.min());
+      if (windowMax > currentMax) currentMax = windowMax;
+      nums.dequeue();
+      nums.enqueue(arr[i]);
+    }
+    if (i === arr.length) {
+      return currentMax;
+    }
   }
 
-  let current = max - min;
-  nums.dequeue();
-  let max = nums.max();
-  let min = nums.min();
-
-  // for (var i = wind; i < arr.length; i++) {
-  //   nums.enqueue(arr[i]);
-  //   windowMax = nums.max() - nums.min()
-    // console.log(nums.max());
-    // console.log(nums.min());
-  //
-  // }
-  // return current;
 
 }
 
 
-// console.log(windowed([1, 0, 2, 5, 4, 8], 2));
+console.log(windowed([1, 0, 2, 5, 4, 8], 2));
 console.log(windowed([1, 0, 2, 5, 4, 8], 3));
-// console.log(windowed([1, 0, 2, 5, 4, 8], 4));
-// console.log(windowed([1, 0, 2, 5, 4, 8], 5));
-//
+console.log(windowed([1, 0, 2, 5, 4, 8], 4));
+console.log(windowed([1, 3, 2, 5, 4, 8], 5));
+
 // windowed_max_range([1, 0, 2, 5, 4, 8], 2) == 4 # 4, 8
 // windowed_max_range([1, 0, 2, 5, 4, 8], 3) == 5 # 0, 2, 5
 // windowed_max_range([1, 0, 2, 5, 4, 8], 4) == 6 # 2, 5, 4, 8
