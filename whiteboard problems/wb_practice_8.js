@@ -75,6 +75,36 @@ class StackQueue {
     this.out = new MinMaxStack();
   }
 
+  length() {
+    return this.in.length + this.out.length
+  }
+
+  min() {
+    let mins = [];
+
+    if (this.in.stack.length > 0) {
+      mins.push(this.in.stack[this.in.stack.length - 1].min);
+    }
+    if (this.out.stack.length > 0) {
+      mins.push(this.out.stack[this.out.stack.length - 1].min);
+    }
+
+    return Math.min(mins);
+  }
+
+  max() {
+    let maxes = [];
+
+    if (this.in.stack.length > 0) {
+      maxes.push(this.in.stack[this.in.stack.length - 1].max);
+    }
+    if (this.out.stack.length > 0) {
+      maxes.push(this.out.stack[this.out.stack.length - 1].max);
+    }
+
+    return Math.max(maxes);
+  }
+
   enqueue(el) {
     this.in.push(el);
   }
@@ -92,17 +122,16 @@ class StackQueue {
 
 
 const q = new StackQueue;
-q.enqueue(5);
-q.enqueue(6);
-q.enqueue(7);
-q.enqueue(8);
-q.enqueue(9);
-q.dequeue();
-console.log(q.in);
-console.log(q.out);
-
-
-
+// q.enqueue(5);
+// q.enqueue(6);
+// q.enqueue(7);
+// q.enqueue(8);
+// q.enqueue(9);
+// q.enqueue(10);
+// q.dequeue();
+// q.dequeue();
+// console.log(q.min());
+// console.log(q.max());
 // But wait - isn't moving every item from our @in stack to the @out
 // stack an O(n) operation? Does this make dequeueing an O(n) operation?
 // While toppling the stack is an O(n) operation, each O(n) operation
@@ -118,17 +147,21 @@ console.log(q.out);
 
 const windowed = (arr, wind) => {
 
-  let nums = new MinMaxStack();
-  // preload the stack
+  let nums = new StackQueue();
+
   for (var i = 0; i < wind; i++) {
-    nums.push(arr[i]);
+    nums.enqueue(arr[i]);
   }
 
-  let maxFound = nums.maxNum() - nums.minNum();
+  let max = nums.max();
+  let min = nums.min();
+  let current = max - min;
+  console.log(current);
 
-  for (var j = wind; j < arr.length; j++) {
+  for (var i = wind; i < arr.length; i++) {
+    
   }
-  // return maxFound;
+
 
 }
 
