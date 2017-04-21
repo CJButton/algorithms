@@ -94,6 +94,10 @@ class Stack {
     this.in.push(el)
   }
 
+  length() {
+    return this.in.stack.length + this.out.stack.length;
+  }
+
   dequeue() {
     if (this.out.stack.length === 0) {
       for (let i = this.in.stack.length - 1; i >= 0; i--) {
@@ -128,11 +132,11 @@ q.enqueue(8);
 q.enqueue(9);
 q.enqueue(10);
 q.dequeue();
-console.log(q.in);
-console.log(q.out);
-console.log(q.max());
-console.log(q.min());
-
+// console.log(q.in);
+// console.log(q.out);
+// console.log(q.max());
+// console.log(q.min());
+// console.log(q.length());
 
 
 
@@ -208,6 +212,9 @@ class StackQueue {
 // While toppling the stack is an O(n) operation, each O(n) operation
 // gives us n free dequeues. Since we get n free dequeues for every O(n)
 // topple and n / n is 1, dequeueing is an O(1) amortized operation.
+
+
+
 
 
 
