@@ -1,5 +1,22 @@
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Bonus Stack:
 // Implement a stack with a method max that returns the maximum value of
 // the stack. max should run in O(1) time, no matter what operations are
@@ -59,6 +76,72 @@ let stack = new MinMaxStack();
 
 
 
+// a queue is FIFO - first in first out
+// enqueue is constant time, which is perfect;
+// but dequeue can be constant time
+// there are a few solutions
+// 1. double linked list, has insertion/deletion at both ends
+// 2. keep a pointer to the last node
+// 3. two stacks, using amortized time, we can get O(1) deletion
+
+class Stack {
+  constructor() {
+    this.in = new MinMaxStack
+    this.out = new MinMaxStack
+  }
+
+  enqueue(el) {
+    this.in.push(el)
+  }
+
+  dequeue() {
+    if (this.out.stack.length === 0) {
+      for (let i = this.in.stack.length - 1; i >= 0; i--) {
+        this.out.push(this.in.pop().val)
+      }
+    }
+    this.out.pop();
+  }
+
+  max() {
+    if (this.in.stack.length === 0) return this.out.maxNum();
+    if (this.out.stack.length === 0) return this.in.maxNum()
+
+    return Math.max(this.in.maxNum(), this.out.maxNum());
+  }
+
+  min() {
+    if (this.in.stack.length === 0) return this.out.minNum();
+    if (this.out.stack.length === 0) return this.in.minNum()
+
+    return Math.min(this.in.minNum(), this.out.minNum());
+  }
+
+
+}
+let q = new Stack
+
+q.enqueue(5);
+q.enqueue(6);
+q.enqueue(7);
+q.enqueue(8);
+q.enqueue(9);
+q.enqueue(10);
+q.dequeue();
+console.log(q.in);
+console.log(q.out);
+console.log(q.max());
+console.log(q.min());
+
+
+
+
+
+
+
+
+
+
 
 // Stack Queue
 // Implement a queue using stacks. That is, write enqueue and dequeue
@@ -79,36 +162,18 @@ class StackQueue {
     return this.in.stack.length + this.out.stack.length
   }
 
-  min() {
-    let mins = [];
+  max() {
+    if (this.in.stack.length === 0) return this.out.maxNum();
+    if (this.out.stack.length === 0) return this.in.maxNum()
 
-    if (this.in.stack.length > 0) {
-      mins.push(this.in.stack[this.in.stack.length - 1].min);
-    }
-
-    if (this.out.stack.length > 0) {
-      mins.push(this.out.stack[this.out.stack.length - 1].min);
-    }
-
-    return mins.reduce((a, b) => {
-      return Math.min(a, b);
-    })
+    return Math.max(this.in.maxNum(), this.out.maxNum());
   }
 
-  max() {
-    let maxes = [];
+  min() {
+    if (this.in.stack.length === 0) return this.out.minNum();
+    if (this.out.stack.length === 0) return this.in.minNum()
 
-    if (this.in.stack.length > 0) {
-      maxes.push(this.in.stack[this.in.stack.length - 1].max);
-    }
-
-    if (this.out.stack.length > 0) {
-      maxes.push(this.out.stack[this.out.stack.length - 1].max);
-    }
-
-    return maxes.reduce((a, b) => {
-      return Math.max(a, b);
-    })
+    return Math.min(this.in.minNum(), this.out.minNum());
   }
 
   enqueue(el) {
@@ -127,7 +192,7 @@ class StackQueue {
 }
 
 
-const q = new StackQueue;
+// const q = new StackQueue;
 // q.enqueue(5);
 // q.enqueue(6);
 // q.enqueue(7);
@@ -177,10 +242,10 @@ const windowed = (arr, wind) => {
 }
 
 
-console.log(windowed([1, 0, 2, 5, 4, 8], 2));
-console.log(windowed([1, 0, 2, 5, 4, 8], 3));
-console.log(windowed([1, 0, 2, 5, 4, 8], 4));
-console.log(windowed([1, 3, 2, 5, 4, 8], 5));
+// console.log(windowed([1, 0, 2, 5, 4, 8], 2));
+// console.log(windowed([1, 0, 2, 5, 4, 8], 3));
+// console.log(windowed([1, 0, 2, 5, 4, 8], 4));
+// console.log(windowed([1, 3, 2, 5, 4, 8], 5));
 
 // windowed_max_range([1, 0, 2, 5, 4, 8], 2) == 4 # 4, 8
 // windowed_max_range([1, 0, 2, 5, 4, 8], 3) == 5 # 0, 2, 5
