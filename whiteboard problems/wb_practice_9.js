@@ -12,11 +12,14 @@
 // You may assume that the first two strings do not contain any
 // characters in common.
 const interleaving = (str1, str2, str3) => {
+  if (str1.length + str2.length !== str3.length) return false;
+
 
   let first = str1.split("");
   let second = str2.split("");
   let third = str3.split("");
   let shared = {};
+  let sharedArr = [];
 
   third.forEach((el, idx) => {
     if (first[0] === el && second[0] === first[0]) {
@@ -26,6 +29,7 @@ const interleaving = (str1, str2, str3) => {
         second.shift();
       } else {
         shared[el] = 1;
+        sharedArr.push(el);
         first.shift();
         second.shift();
       }
@@ -34,12 +38,19 @@ const interleaving = (str1, str2, str3) => {
     } else if (second[0] === el) {
       second.shift();
     } else if (el in shared) {
-      shared[el] = shared[el] -= 1;
+      shared[el] = (shared[el] -= 1);
+      if (shared[el] === 0) {
+        delete shared[el];
+      }
     }
-
   });
 
-  if (first.length + second.length === 0) {
+
+  // note that shared === {} returns false; also with ==
+  // interesting
+
+  if ((first.length + second.length === 0) &&
+                      Object.keys(shared).length === 0) {
     return true;
   } else {
     return false;
@@ -50,7 +61,7 @@ const interleaving = (str1, str2, str3) => {
 
 
 console.log(interleaving('xxy', 'xxz', 'xxzxxy'));
-console.log(interleaving('abc', 'def', 'abdecf'));
+// console.log(interleaving('abc', 'def', 'abdecf'));
 // abdecf => true
 
 
