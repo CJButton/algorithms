@@ -1,4 +1,59 @@
 
+
+// Interleaving?
+
+// Given three strings, return whether the third is an interleaving of
+// the first two. Interleaving means it only contains characters from
+// the other two, no more no less, and preserves their character
+// ordering. "abdecf" is an interleaving of "abc" and "def".
+// Note that the first two strings needn't be in alphabetical order
+// like these.
+
+// You may assume that the first two strings do not contain any
+// characters in common.
+const interleaving = (str1, str2, str3) => {
+
+  let first = str1.split("");
+  let second = str2.split("");
+  let third = str3.split("");
+  let shared = {};
+
+  third.forEach((el, idx) => {
+    if (first[0] === el && second[0] === first[0]) {
+      if (el in shared) {
+        shared[el] = shared[el] += 1;
+        first.shift();
+        second.shift();
+      } else {
+        shared[el] = 1;
+        first.shift();
+        second.shift();
+      }
+    } else if (first[0] === el) {
+      first.shift();
+    } else if (second[0] === el) {
+      second.shift();
+    } else if (el in shared) {
+      shared[el] = shared[el] -= 1;
+    }
+
+  });
+
+  if (first.length + second.length === 0) {
+    return true;
+  } else {
+    return false;
+  }
+
+}
+
+
+
+console.log(interleaving('xxy', 'xxz', 'xxzxxy'));
+console.log(interleaving('abc', 'def', 'abdecf'));
+// abdecf => true
+
+
 // Find the Missing Number
 
 // Assume an array of non-negative integers. A second array is formed
@@ -45,7 +100,7 @@ const missing = (arr1, arr2) => {
 //
 // }
 
-console.log(missing([1, 2, 3, 4, 5], [1, 2, 3, 5]));
+// console.log(missing([1, 2, 3, 4, 5], [1, 2, 3, 5]));
 
 
 
