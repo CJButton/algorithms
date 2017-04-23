@@ -19,12 +19,6 @@ const interleaving = (str1, str2, str3) => {
   let third = str3.split("");
   let sharedArr = [];
 
-
-  // not needed now?
-  const checker = (el) => {
-
-  }
-
   for (var i = 0; i < third.length; i++) {
     let el = str3[i];
 
@@ -43,11 +37,6 @@ const interleaving = (str1, str2, str3) => {
         sharedArr.shift();
     }
   }
-
-  console.log(sharedArr);
-  console.log(first);
-  console.log(second);
-
 
   if (sharedArr.length + first.length + second.length === 0) {
     return true;
