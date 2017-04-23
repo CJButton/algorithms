@@ -14,54 +14,92 @@
 const interleaving = (str1, str2, str3) => {
   if (str1.length + str2.length !== str3.length) return false;
 
-
   let first = str1.split("");
   let second = str2.split("");
   let third = str3.split("");
-  let shared = {};
   let sharedArr = [];
 
-  third.forEach((el, idx) => {
-    if (first[0] === el && second[0] === first[0]) {
-      if (el in shared) {
-        shared[el] = shared[el] += 1;
-        first.shift();
-        second.shift();
-      } else {
-        shared[el] = 1;
-        sharedArr.push(el);
-        first.shift();
-        second.shift();
-      }
-    } else if (first[0] === el) {
+
+  // not needed now?
+  const checker = (el) => {
+
+  }
+
+  for (var i = 0; i < third.length; i++) {
+    let el = str3[i];
+
+    if (el === first[0] && (second[0] === first[0])) {
+      sharedArr.push(el);
       first.shift();
-    } else if (second[0] === el) {
       second.shift();
-    } else if (el in shared) {
-      shared[el] = (shared[el] -= 1);
-      if (shared[el] === 0) {
-        delete shared[el];
-      }
     }
-  });
+    else if (first[0] === el) {
+      first.shift();
+    }
+    else if (second[0] === el) {
+      second.shift();
+    }
+    else if (sharedArr[0] === el) {
+        sharedArr.shift();
+    }
+  }
+
+  console.log(sharedArr);
+  console.log(first);
+  console.log(second);
 
 
-  // note that shared === {} returns false; also with ==
-  // interesting
-
-  if ((first.length + second.length === 0) &&
-                      Object.keys(shared).length === 0) {
+  if (sharedArr.length + first.length + second.length === 0) {
     return true;
-  } else {
+  }
+  else {
     return false;
   }
 
+  // we get to the z and y  elements, and we know that before we use
+  // both of them, we MUST use up our x's first. Otherwise the elements
+  // would prove to be out of order. So the checks we need are what:
+  // 1.
+
+  // note that shared === {} returns false; also with ==
+  // interesting!
+
 }
 
+console.log(interleaving('xxy', 'xzx', 'xxyxxz'));
+console.log(interleaving('abc', 'def', 'abdecf'));
+//
+// beer
+// beer
+//
+// bbeeeerr // true
+// bebeeerr // true
+// beeerrbe // false
+//
+// xxy
+// xxz
+//
+// xxyxxz // true
+// xxyxzx // false
+//
+// // if three el same, push into extras
+// // if el not in two strings, check extras
+// // then unshift that element
+// // if not in extras, return false
+//
+// should return false
 
 
-console.log(interleaving('xxy', 'xxz', 'xxzxxy'));
-// console.log(interleaving('abc', 'def', 'abdecf'));
+// zx
+// xz
+//
+// extras = []
+
+
+
+
+
+
 // abdecf => true
 
 
