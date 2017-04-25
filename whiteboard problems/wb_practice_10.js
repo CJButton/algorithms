@@ -1,5 +1,78 @@
 
 
+// Max Unique pSub
+// Given a string, find the lexicographically greatest pseudo-substring.
+// lexicographical order === dictionary order
+//
+// Example (read on for further explanation):
+//
+// max_unique_psub('abcdef')
+// => 'f'
+//
+// max_unique_psub('abcdefedcba')
+// => 'fedcba'
+//
+// max_unique_psub('algorithms')
+// => 'ts'
+
+// Let's define a pseudo-substring: psub is any subset that is ordered
+// by index. (Differs from a standard substring because it does not need
+// to be contiguous.)
+//
+// For example:
+//
+// "ac" is a psub of "acb"
+// "cb" is a psub of "acb"
+// "bc" is _not_ a psub of "acb" (letters are out of order)
+//
+// psubs("acb") == [
+//   "a",
+//   "ac",
+//   "acb",
+//   "ab",
+//   "c",
+//   "cb",
+//   "b"
+// ]
+
+// Next, let's define lexicographical order:
+
+// str1 > str2 IF
+// (a) str1 != str2 AND EITHER
+// (b1) str2 is a prefix of str1 OR
+// (b2) at the first position at which str1 and str2 differ (say i), str1[i] > str2[i].
+// For instance: "abc" > "ab" and "acb" > "abc".
+
+
+const psubs = (string) => {
+
+  // psub_arr = [str[str.length - 1]]
+  //
+  // (str.length - 2).downto(0) do |i|
+  //   next if str[i] < psub_arr.last
+  //   # this is amortized O(1) time.
+  //   psub_arr << str[i]
+  // end
+  //
+  // psub = psub_arr.reverse.join("")
+  // psub
+
+  let subs = [string[string.length - 1]]
+
+  for (var i = string.length - 2; i > 0; i--) {
+    if (string[i] < subs[string.length - 1]) {
+      continue
+    }
+    subs.push(string[i]);
+  }
+  return subs.reverse().join("");
+
+end
+
+}
+
+console.log(psubs("abcdefedcba"));
+
 
 
 // Factorial
@@ -18,7 +91,7 @@
 // got it! when tested individually, they come out similarly when
 // recursing 10
 // when working with 100, the CTO is marginally faster, but the
-// iterator still generally won overall
+// iterator still generally won
 
 const factorial3 = (n) => {
   return facrec(n, 1);
@@ -31,10 +104,10 @@ const facrec = (x, acc) => {
     return facrec(x - 1, x * acc);
   }
 }
-var t1 = performance.now();
-console.log(factorial3(100));
-var t2 = performance.now();
-console.log(t2 - t1);
+// var t1 = performance.now();
+// console.log(factorial3(100));
+// var t2 = performance.now();
+// console.log(t2 - t1);
 // 2.5 - 3.6
 
 
