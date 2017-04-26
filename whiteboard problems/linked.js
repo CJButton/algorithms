@@ -10,6 +10,30 @@ class DoubleNode {
 
 class DoubleLinkedList {
   constructor() {
+    // private functions can be created, but must be placed in the
+    // constructor, examples given below
+
+    // initialise private data
+    //  var isPending = true;
+    //  var handlers = {
+    //      resolve: [],
+    //      reject: [],
+    //      notify: []
+    //  };
+     //
+    //  // Private method
+    //  function trigger(event, params) {
+    //      ...
+    //  }
+     //
+    //  // initialise public properties
+    //  this.promise = new Promise(this);
+     //
+    //  // and create privileged methods
+    //  this.resolve = trigger.bind(null, 'resolve');
+    //  this.reject = trigger.bind(null, 'reject');
+    //  this.notify = trigger.bind(null, 'notify');
+    
     this.head = null
     this.tail = null
   }
