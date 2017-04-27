@@ -1,4 +1,68 @@
 
+// consider moving to FL for a couple of months and continue applying
+// if nothing comes, then move back to Kawasaki with Chika
+// tough times!
+
+// Detect a loop in a DLL:
+// consider using a tortoise and hare strategy
+// have the hare move at double speed (node.next.next), and
+// have the tortoise move at single (node.next)
+// if the hare and the tortoise are the same val, then we have found a loop
+// if the tortoise reaches the tail node, then there is no loop
+
+
+
+
+// Delete kth node frm the end of an SLL
+
+
+// Find the kth node from the end in a SLL
+// some kind of dragger system?
+// k = 5, so we want the 5th from last element in the SLL
+// kval = 11
+// i = 6
+// 10, 11, 12, 13, 14, 15
+
+
+const permutations = (arr) => {
+
+  // first find total perms
+  let totalPerms = 1;
+  for (var i = arr.length; i > 1; i--) {
+    totalPerms *= i;
+  }
+
+  let results = [arr];
+  let idx = 0;
+
+  for (var i = 0; i < results[idx].length - 1; i++) {
+      let copy = results[idx].slice();
+      let swap = copy[i + 1];
+      copy[i + 1] = copy[i];
+      copy[i] = swap;
+      results.push(copy)
+      idx += 1;
+  }
+  idx += 1;
+  return results;
+
+
+}
+
+// => [[1, 2, 3], [2, 1, 3], [2, 3, 1], [1, 3, 2], [3, 1, 2], [3, 2, 1]]
+// console.log(permutations([1, 2, 3]));
+
+// results should be:
+// [ [ 1, 2, 3 ],
+//   [ 1, 3, 2 ],
+//   [ 2, 1, 3 ],
+//   [ 2, 3, 1 ],
+//   [ 3, 1, 2 ],
+//   [ 3, 2, 1 ] ]
+
+
+
+
 //====================================================
 // function getPermutations(str){
 //     //Enclosed data to be used by the internal recursive function permutate():
@@ -69,11 +133,11 @@ const permutation = (arr) => {
       results.push([arr[i]]);
     } else {
       for (var j = 0; j < rest.length; j++) {
-        console.log(rest);
-        console.log(arr[i]);
-        console.log(rest[j]);
-        console.log(j);
-        console.log();
+        // console.log(rest);
+        // console.log(arr[i]);
+        // console.log(rest[j]);
+        // console.log(j);
+        // console.log();
         results.push([arr[i]].concat(rest[j]));
       }
     }
@@ -81,7 +145,7 @@ const permutation = (arr) => {
   return results;
 
 }
-// 
+//
 // [ [ 3 ] ]
 // 2
 // [ 3 ]
@@ -170,5 +234,5 @@ const permutation = (arr) => {
 //   return res;
 // }
 
-console.log(permutation([1,2,3]));
+// console.log(permutation([1,2,3]));
 // => [[1, 2, 3], [2, 1, 3], [2, 3, 1], [1, 3, 2], [3, 1, 2], [3, 2, 1]]
