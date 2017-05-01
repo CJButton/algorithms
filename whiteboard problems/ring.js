@@ -59,9 +59,6 @@ class RingBuffer {
       newArr[newIdx] = this.arr[i];
       newIdx += 1;
     }
-    console.log(this.arr);
-    console.log(newArr);
-    console.log();
 
     this.size *= 2;
     this.arr = newArr;

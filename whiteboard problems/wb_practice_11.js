@@ -24,44 +24,6 @@
 // 10, 11, 12, 13, 14, 15
 
 
-const permutations = (arr) => {
-
-  // first find total perms
-  let totalPerms = 1;
-  for (var i = arr.length; i > 1; i--) {
-    totalPerms *= i;
-  }
-
-  let results = [arr];
-  let idx = 0;
-
-  for (var i = 0; i < results[idx].length - 1; i++) {
-      let copy = results[idx].slice();
-      let swap = copy[i + 1];
-      copy[i + 1] = copy[i];
-      copy[i] = swap;
-      results.push(copy)
-      idx += 1;
-  }
-  idx += 1;
-  return results;
-
-
-}
-
-// => [[1, 2, 3], [2, 1, 3], [2, 3, 1], [1, 3, 2], [3, 1, 2], [3, 2, 1]]
-// console.log(permutations([1, 2, 3]));
-
-// results should be:
-// [ [ 1, 2, 3 ],
-//   [ 1, 3, 2 ],
-//   [ 2, 1, 3 ],
-//   [ 2, 3, 1 ],
-//   [ 3, 1, 2 ],
-//   [ 3, 2, 1 ] ]
-
-
-
 
 //====================================================
 // function getPermutations(str){
@@ -116,13 +78,6 @@ const permutations = (arr) => {
 
 
 const permutation = (arr) => {
-  // create results array where we will place each permuation
-  // iterate over each element in the array
-  // split it into pieces of 'first element' and everything else
-  // [1, 2, 3] => [1] [2, 3]
-  // and recurse through each new array piece
-  // after reaching an empty array, we can start piecing it back together
-  // console.log(arr);
 
   let results = [];
   for (var i = 0; i < arr.length; i++) {
@@ -133,11 +88,6 @@ const permutation = (arr) => {
       results.push([arr[i]]);
     } else {
       for (var j = 0; j < rest.length; j++) {
-        // console.log(rest);
-        // console.log(arr[i]);
-        // console.log(rest[j]);
-        // console.log(j);
-        // console.log();
         results.push([arr[i]].concat(rest[j]));
       }
     }
@@ -145,6 +95,9 @@ const permutation = (arr) => {
   return results;
 
 }
+
+permutation([1, 2, 3])
+
 //
 // [ [ 3 ] ]
 // 2
