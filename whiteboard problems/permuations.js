@@ -1,13 +1,6 @@
 
 
 
-// Heap's generates (n - 1)! permuations
-// If n is odd, swap the first and last element and if n is even, then swap
-// the ith element (i is the counter starting from 0) and the last
-// element and repeat the above algorithm till i is less than n.
-
-
-
 const heaps = (arr, len) => {
   if (len === 0) return [];
 
