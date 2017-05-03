@@ -75,8 +75,32 @@ class BST {
   postOrder() {
 
   }
+  // In this traversal method, the left subtree is visited first, then
+  // the root and later the right sub-tree. We should always remember
+  // that every node may represent a subtree itself.
 
-  inOrder() {
+  // If a binary tree is traversed in-order, the output will produce
+  // sorted key values in an ascending order.
+  inOrder(node = this.root) {
+
+    let rest;
+    let order = [];
+    // if we reach the left max
+    if (node.left === null) {
+      order.push(node);
+      return order;
+    } else {
+      // if we can still go deeper
+      rest = inOrder(node.left);
+    }
+
+    order.concat(rest).concat(node);
+    if (node.right) {
+      inOrder(node.right);
+    }
+
+    return order;
+
 
   }
 
@@ -87,7 +111,6 @@ class BST {
 }
 
 let bst = new BST;
-console.log(bst.find(11));
 bst.insert(5);
 bst.insert(4);
 bst.insert(6);
