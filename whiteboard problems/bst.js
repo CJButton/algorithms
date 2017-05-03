@@ -82,26 +82,23 @@ class BST {
   // If a binary tree is traversed in-order, the output will produce
   // sorted key values in an ascending order.
   inOrder(node = this.root) {
-
     let rest;
     let order = [];
-    // if we reach the left max
+
     if (node.left === null) {
-      order.push(node);
+      order.push(node.val);
       return order;
     } else {
-      // if we can still go deeper
-      rest = inOrder(node.left);
+      rest = this.inOrder(node.left);
+      order = order.concat(rest);
     }
+    order.push(node.val);
 
-    order.concat(rest).concat(node);
     if (node.right) {
-      inOrder(node.right);
+      order = order.concat(this.inOrder(node.right));
     }
 
     return order;
-
-
   }
 
   delete(val) {
@@ -111,7 +108,11 @@ class BST {
 }
 
 let bst = new BST;
-bst.insert(5);
-bst.insert(4);
 bst.insert(6);
-bst.insert(10)
+bst.insert(4);
+bst.insert(3);
+bst.insert(5);
+bst.insert(10);
+bst.insert(11);
+bst.insert(9);
+console.log(bst.inOrder());
