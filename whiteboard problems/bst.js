@@ -116,8 +116,29 @@ class BST {
       rest = this.preOrder(node.right);
       order = order.concat(rest);
     }
+    return order;
+  }
+
+  postOrder(node = this.root) {
+
+    let order = [];
+    let rest;
+
+    if (node.right) {
+      rest = this.postOrder(node.right);
+      order = rest.concat(order);
+    }
+
+    if (node.left) {
+      rest = this.postOrder(node.left);
+      order = rest.concat(order);
+    }
+
+
+    order.push(node.val);
 
     return order;
+
 
   }
 
@@ -135,4 +156,4 @@ bst.insert(5);
 bst.insert(10);
 bst.insert(9);
 bst.insert(11);
-console.log(bst.preOrder());
+console.log(bst.postOrder());
