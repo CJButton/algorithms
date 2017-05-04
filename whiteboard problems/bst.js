@@ -66,21 +66,6 @@ class BST {
   }
 
 
-
-
-  preOrder() {
-
-  }
-
-  postOrder() {
-
-  }
-  // In this traversal method, the left subtree is visited first, then
-  // the root and later the right sub-tree. We should always remember
-  // that every node may represent a subtree itself.
-
-  // If a binary tree is traversed in-order, the output will produce
-  // sorted key values in an ascending order.
   inOrder(node = this.root) {
     let rest;
     let order = [];
@@ -101,6 +86,7 @@ class BST {
     return order;
   }
 
+
   preOrder(node = this.root) {
 
     let order = [];
@@ -119,27 +105,24 @@ class BST {
     return order;
   }
 
+
   postOrder(node = this.root) {
 
     let order = [];
     let rest;
 
-    if (node.right) {
-      rest = this.postOrder(node.right);
-      order = rest.concat(order);
-    }
-
     if (node.left) {
       rest = this.postOrder(node.left);
-      order = rest.concat(order);
+      order = order.concat(rest);
     }
 
-
+    if (node.right) {
+      rest = this.postOrder(node.right);
+      order = order.concat(rest);
+    }
     order.push(node.val);
 
     return order;
-
-
   }
 
   delete(val) {
