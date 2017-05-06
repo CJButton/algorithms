@@ -135,10 +135,16 @@ class BST {
     } else {
       minEl = this.min(node.left);
     }
+  }
 
-    if (node.left === minEl) node.left = null;
-    return minEl;
+  max(node = this.root) {
+    let maxEl;
 
+    if(!node.right) {
+      return node;
+    } else {
+      maxEl = this.max(node.right);
+    }
   }
 
   delete(val) {
@@ -146,10 +152,25 @@ class BST {
     // !what if node is root?!
     let found = false;
     let node = this.root;
-    let parent
+    let children = [node.left, node.right]
+    let idx = 1;
+    let parent;
 
+    // 3 possiblities: no children, 1 child, 2 children
+    // if two children, choose min from right subtree
+
+    // replace del el with min el, and switch the children to min el
     while (found) {
-      
+      if (val < node.val) {
+        idx = 0;
+      } else if (val > node.val) {
+        idx = 1;
+      } else if (val === node.val) {
+        found = true;
+      }
+      parent = node;
+      node = children[idx];
+
     }
 
 
