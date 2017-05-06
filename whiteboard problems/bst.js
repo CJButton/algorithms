@@ -42,6 +42,8 @@ class BST {
       }
     }
 
+    return node;
+
   }
 
   insert(val) {
@@ -125,7 +127,45 @@ class BST {
     return order;
   }
 
+  min(node = this.root) {
+    let minEl;
+
+    if (!node.left) {
+      return node;
+    } else {
+      minEl = this.min(node.left);
+    }
+
+    if (node.left === minEl) node.left = null;
+    return minEl;
+
+  }
+
   delete(val) {
+    // find node to delete and it's parent
+    // !what if node is root?!
+    let found = false;
+    let node = this.root;
+    let parent
+
+    while (found) {
+      
+    }
+
+
+
+
+    // 3 checks
+    // no children
+    // one child
+    // two children
+
+
+    //two children:
+    // find min from the right child and it's parent
+    // delete min from it's parent's child
+    // repalce deleted value with min
+    // move deleted's children to min's
 
   }
 
@@ -139,4 +179,4 @@ bst.insert(5);
 bst.insert(10);
 bst.insert(9);
 bst.insert(11);
-console.log(bst.postOrder());
+console.log(bst.find(10));
