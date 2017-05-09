@@ -127,14 +127,27 @@ class BST {
     return order;
   }
 
-  min(node = this.root) {
-    let minEl;
+  delMin(node = this.root) {
+    let searching = true;
+    let parent = node;
+    let min;
 
-    if (!node.left) {
-      return node;
-    } else {
-      minEl = this.min(node.left);
+    while (searching) {
+      if (!node.left.left) {
+        searching = false;
+        min = node.left;
+        node.left = null;
+        return min;
+      } else {
+        node = node.left;
+      }
     }
+    // let minEl;
+    // if (!node.left) {
+    //   return node;
+    // } else {
+    //   minEl = this.min(node.left);
+    // }
   }
 
   max(node = this.root) {
@@ -170,16 +183,7 @@ class BST {
       }
       parent = node;
       node = children[idx];
-
     }
-
-
-
-
-    // 3 checks
-    // no children
-    // one child
-    // two children
 
 
     //two children:
@@ -200,4 +204,5 @@ bst.insert(5);
 bst.insert(10);
 bst.insert(9);
 bst.insert(11);
-console.log(bst.find(10));
+console.log(bst.delMin());
+console.log(bst);
