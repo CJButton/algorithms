@@ -127,7 +127,21 @@ class BST {
     return order;
   }
 
+
+
+
   delMin(node = this.root) {
+    // choose the right node
+    // if it has no children/ one child/ two children/
+    if (!node.left && !node.right) {
+      return node;
+    } else if (node.left || node.right) {
+
+    } else {
+
+    }
+
+
     let searching = true;
     let parent = node;
     let min;
@@ -142,13 +156,10 @@ class BST {
         node = node.left;
       }
     }
-    // let minEl;
-    // if (!node.left) {
-    //   return node;
-    // } else {
-    //   minEl = this.min(node.left);
-    // }
+
   }
+
+  
 
   max(node = this.root) {
     let maxEl;
@@ -163,28 +174,38 @@ class BST {
   delete(val) {
     // find node to delete and it's parent
     // !what if node is root?!
-    let found = false;
+    let searching = true;
     let node = this.root;
-    let children = [node.left, node.right]
-    let idx = 1;
+    let childIdx = 1;
     let parent;
+    let children = [node.left, node.right]
 
     // 3 possiblities: no children, 1 child, 2 children
     // if two children, choose min from right subtree
 
-    // replace del el with min el, and switch the children to min el
-    while (found) {
+    while (searching) {
       if (val < node.val) {
-        idx = 0;
+        parent = node;
+        node = node.left;
+        childIdx = 0;
       } else if (val > node.val) {
-        idx = 1;
+        parent = node;
+        node = node.right;
+        childIdx = 1;
       } else if (val === node.val) {
-        found = true;
+        searching = false;
       }
-      parent = node;
-      node = children[idx];
     }
+    console.log(node);
 
+    if (node.left && node.right) {
+      // if node to delete has two children
+      console.log(this.delMin(node.right));
+    } else if (node.left || node.right) {
+
+    } else {
+
+    }
 
     //two children:
     // find min from the right child and it's parent
@@ -204,5 +225,4 @@ bst.insert(5);
 bst.insert(10);
 bst.insert(9);
 bst.insert(11);
-console.log(bst.delMin());
-console.log(bst);
+bst.delete(4);
