@@ -131,16 +131,7 @@ class BST {
 
 
   delMin(node = this.root) {
-    // choose the right node
-    // if it has no children/ one child/ two children/
-    if (!node.left && !node.right) {
-      return node;
-    } else if (node.left || node.right) {
-
-    } else {
-
-    }
-
+    if (!node.left) return node;
 
     let searching = true;
     let parent = node;
@@ -196,28 +187,29 @@ class BST {
         searching = false;
       }
     }
-    // console.log(parent);
-    // console.log(node);
-    // console.log(childIdx);
 
     let min;
+    let singleChild;
     if (node.left && node.right) {
-      // if node to delete has two children, find the min val on the
-      // right child
+      // if node to delete has two children, find the min val on right
       min = this.delMin(node.right);
+      if (node.right === min) {
+        min.left = node.left;
+      } else {
+        min.left = node.left;
+        min.right = node.right;
+      }
+      childIdx === 0 ? parent.left = min : parent.right = min
+
     } else if (node.left || node.right) {
       // if there is only one child on the node to be deleted
-      let singleChild = node.left ? node.left : node.right
+      singleChild = node.left ? node.left : node.right
       childIdx === 0 ? parent.left = singleChild : parent.right = singleChild
+
     } else {
       // if it has no children nodes at all
       childIdx === 0 ? parent.left = null : parent.right = null
     }
-    //two children:
-    // find min from the right child and it's parent
-    // delete min from it's parent's child
-    // repalce deleted value with min
-    // move deleted's children to min's
 
   }
 
@@ -226,8 +218,8 @@ class BST {
 let bst = new BST;
 bst.insert(6);
 bst.insert(4);
-// bst.insert(3);
-// bst.insert(5);
+bst.insert(3);
+bst.insert(5);
 bst.insert(10);
 bst.insert(9);
 bst.insert(11);
