@@ -150,19 +150,14 @@ class BST {
 
   }
 
-
-
-  max(node = this.root) {
-    let maxEl;
-
-    if(!node.right) {
-      return node;
-    } else {
-      maxEl = this.max(node.right);
-    }
-  }
-
   delete(val) {
+    let min;
+    if (this.root.val === val) {
+      min = this.delMin(this.root.right);
+      [min.left, min.right] = [this.root.left, this.root.right];
+      this.root = min;
+      return;
+    }
     // find node to delete and it's parent
     // !what if node is root?!
     let searching = true;
@@ -188,7 +183,6 @@ class BST {
       }
     }
 
-    let min;
     let singleChild;
     if (node.left && node.right) {
       // if node to delete has two children, find the min val on right
@@ -223,4 +217,4 @@ bst.insert(5);
 bst.insert(10);
 bst.insert(9);
 bst.insert(11);
-bst.delete(4);
+bst.delete(6);
