@@ -158,16 +158,12 @@ class BST {
       this.root = min;
       return;
     }
-    // find node to delete and it's parent
-    // !what if node is root?!
+
     let searching = true;
     let node = this.root;
     let childIdx = 1;
     let parent;
     let children = [node.left, node.right]
-
-    // 3 possiblities: no children, 1 child, 2 children
-    // if two children, choose min from right subtree
 
     while (searching) {
       if (val < node.val) {
@@ -217,4 +213,5 @@ bst.insert(5);
 bst.insert(10);
 bst.insert(9);
 bst.insert(11);
-bst.delete(6);
+// bst.delete(6);
+export const bst;
