@@ -214,4 +214,3 @@ bst.insert(10);
 bst.insert(9);
 bst.insert(11);
 // bst.delete(6);
-export const bst;
