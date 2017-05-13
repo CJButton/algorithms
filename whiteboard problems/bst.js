@@ -213,4 +213,38 @@ bst.insert(5);
 bst.insert(10);
 bst.insert(9);
 bst.insert(11);
-// bst.delete(6);
+
+
+const isBst = (node) => {
+  if (!node.left && !node.right) return true;
+
+  if (node.left) {
+    if (node.left.val > node.val) {
+      return false;
+    } else {
+      dive = isBst(node.left);
+    }
+  }
+
+  if (node.right) {
+    if (node.right.val < node.val) {
+      return false;
+    } else {
+      dive = isBst(node.right);
+    }
+  }
+
+  return dive;
+
+}
+
+console.log(isBst(bst.root));
+
+
+
+
+
+
+
+
+//
