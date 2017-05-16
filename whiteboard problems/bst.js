@@ -237,10 +237,11 @@ const isBst = (node) => {
   return dive;
 
 }
+isBst(bst.root);
 
-console.log(isBst(bst.root));
-
-
+// Find the lowest common ancestor of two nodes in a binary search tree.
+// Write the function in JS. Assume I give you both the root and the
+// two nodes.
 
 
 
