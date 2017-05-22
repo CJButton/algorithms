@@ -6,8 +6,24 @@
 
 // Answer 1: iterate through each indidiviudal element in the string,
 // and add them to a set. Check if said character is already in the Set.
-// Answer 2: 
+const isUnique1 = (str) => {
+  let letters = str.split("");
+  let letterSet = new Set;
 
+  for (idx in letters) {
+    let char = letters[idx];
+    if (!letterSet.has(char)) {
+      letterSet.add(char);
+    } else {
+      return false;
+    }
+  }
+  console.log(letterSet);
+  return true;
+}
+
+console.log(isUnique1("abcdefg"));
+console.log(isUnique1("abb"));
 
 
 
